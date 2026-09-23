@@ -284,6 +284,9 @@ def build_report():
         res2["month"] = pd.to_datetime(res2["start"], unit="s").dt.strftime("%Y-%m")
         L.append("По месяцам: " + ", ".join(f"{m}: ${v:,.0f}" for m, v in res2.groupby("month")["pnl"].sum().items()))
         csvs["windows_pnl.csv"] = pw
+    else:
+        L.append(f"Победители окон ещё не подтянуты (окон со сделками: {len(pw)}). "
+                 "PnL появится после этапа «Восстанавливаю рыночный контекст».")
 
     # --- Почерк
     t = ud[ud["type"] == "TRADE"].copy()
